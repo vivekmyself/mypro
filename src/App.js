@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Route, NavLink, HashRouter } from "react-router-dom";
+import { Route, NavLink, HashRouter, Switch } from "react-router-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "./App.css";
 
 import Home from "./content/Home";
@@ -26,9 +27,15 @@ class App extends Component {
             </li>
           </ul>
           <div className="content">
-            <Route exact path="/" component={Home} />
-            <Route path="/stuff" component={Stuff} />
-            <Route path="/contact" component={Contact} />
+            <TransitionGroup>
+              <CSSTransition className="fade-enter" timeout={1000}>
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route path="/stuff" component={Stuff} />
+                  <Route path="/contact" component={Contact} />
+                </Switch>
+              </CSSTransition>
+            </TransitionGroup>
           </div>
         </div>
       </HashRouter>
